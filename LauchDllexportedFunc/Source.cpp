@@ -7,7 +7,21 @@
 
 using namespace std;
 
+
+
+/* Define a function pointer for our imported
+ * function.
+ * This reads as "introduce the new type f_funci as the type:
+ *                pointer to a function returning an int and
+ *                taking no arguments.
+ *
+ * Make sure to use matching calling convention (__cdecl, __stdcall, ...)
+ * with the exported function. __stdcall is the convention used by the WinAPI
+ */
+
 typedef int(__stdcall* f_funci)();
+
+
 
 
 int main() {
