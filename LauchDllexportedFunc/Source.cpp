@@ -1,0 +1,41 @@
+#include <windows.h>
+#include <iostream>
+#include<stdlib.h>
+#include<string.h>
+#include <fstream>
+
+
+using namespace std;
+
+typedef int(__stdcall* f_funci)();
+
+
+int main() {
+
+	ifstream ifile;
+	ifile.open("C://Users/pxj59//Desktop//PopExportMessage.dll");
+	if (ifile) {
+	
+		HINSTANCE hGetProcIDDLL = LoadLibrary(L"C:\\Users\\pxj59\\Desktop\\PopExportMessage.dll");
+		if (!hGetProcIDDLL) {
+			std::cout << "could not load the dynamic library" << std::endl;
+			return EXIT_FAILURE;
+		}
+
+		f_funci funci = (f_funci)GetProcAddress(hGetProcIDDLL, "doSomething");
+		if (!funci) {
+			std::cout << "could not locate the function" << std::endl;
+			cout << "got here";
+			return EXIT_FAILURE;
+		}
+
+		std::cout << "funci() returned " << funci() << std::endl;
+
+		return 0;
+	}
+	else {
+		cout << "file doesn't exist";
+		return 0;
+	}
+	
+}
